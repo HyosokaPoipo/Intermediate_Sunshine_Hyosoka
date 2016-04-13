@@ -6,6 +6,9 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
@@ -31,6 +34,38 @@ public class ForecastFragment extends Fragment {
     {
 
     }
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        super.onCreateOptionsMenu(menu, inflater);
+
+        //ini buat ngeload menu forecastfragment.xml yang kita buat sebelumnya
+        inflater.inflate(R.menu.forecastfragment, menu);
+    }
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        //setHasOptionMenu itu buat ngehandle event2 menu
+        setHasOptionsMenu(true);
+
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+        if (id == R.id.action_refresh) {
+            /**
+             * disini kode buat action yang akan sunshine lakukan
+             * ketika menu Refresh di pencet...hehehe...:D
+             */
+            FetchWeatherTask weatherTask = new FetchWeatherTask();
+            weatherTask.execute();
+                return true;
+            }
+        return super.onOptionsItemSelected(item);
+    }
+
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
