@@ -148,6 +148,8 @@ public class ForecastFragment extends Fragment {
                 }
                 //Masukin response akhir yang udah berupa string ke forecastJsonStr
                 forecastJsonStr = buffer.toString();
+                Log.i("Data OpenWeatherMap",forecastJsonStr);
+
             } catch (IOException e) {
                 Log.e("ForecastFragment", "Error ", e);
                 //Klu ada error pas mau ngambil data dari weatherMap, berarti kita g' dapat respon apa2
