@@ -36,6 +36,7 @@ import java.util.List;
  */
 public class ForecastFragment extends Fragment {
 
+    private ArrayAdapter<String> mForecastAdapter = null;
     //Constructor
     public ForecastFragment()
     {
@@ -88,7 +89,7 @@ public class ForecastFragment extends Fragment {
             };
             List<String> weekForecast = new ArrayList<String>(Arrays.asList(data));
 
-            ArrayAdapter<String> mForecastAdapter =
+            mForecastAdapter =
                     new ArrayAdapter<String>(
                             getActivity(), // The current context (this activity)
                             R.layout.list_item_forecast, // The name of the layout ID.
@@ -300,6 +301,19 @@ public class ForecastFragment extends Fragment {
             }
 
             return null;
+        }
+
+
+        @Override
+        protected void onPostExecute(String[] strings) {
+            super.onPostExecute(strings);
+            if (strings != null) {
+            mForecastAdapter.clear();
+            for(String dayForecastStr : strings) {
+                    mForecastAdapter.add(dayForecastStr);
+                }
+            // New data is back from the server.  Hooray!
+            }
         }
     }
 
